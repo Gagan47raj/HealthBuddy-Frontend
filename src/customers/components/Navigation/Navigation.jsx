@@ -269,7 +269,7 @@ export default function Navigation() {
 
                   <span className="sr-only">Your Company</span>
                   <img
-                    src="= {healthBuddy}
+                    src={healthBuddy}
                     alt="HealthBuddy"
                     className="h-8 w-8 mr-2"
                   />
