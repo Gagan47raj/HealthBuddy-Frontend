@@ -18,7 +18,6 @@ import TextField from "@mui/material/TextField";
 import AuthModel from "../../Auth/AuthModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../../States/Auth/Action";
-import healthBuddy from './healthBuddy.png';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -269,7 +268,7 @@ export default function Navigation() {
 
                   <span className="sr-only">Your Company</span>
                   <img
-                    src={healthBuddy}
+                    src="healthBuddy.png"
                     alt="HealthBuddy"
                     className="h-8 w-8 mr-2"
                   />
