@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import Navigation from './customers/components/Navigation/Navigation';
+import HomePage from './customers/pages/HomePage/HomePage';
+import Footer from './customers/components/Footer/Footer';
+import Product from './customers/components/Product/Product';
+import ProductDetail from './customers/components/ProductDetails/ProductDetail';
+import Cart from './customers/components/Cart/Cart';
+import Checkout from './customers/components/Checkout/Checkout';
+import Orders from './customers/components/Orders/Orders';
+import OrderDetails from './customers/components/Orders/OrderDetails';
+import { Route, Routes } from 'react-router-dom';
+import CustomerRouters from './Routers/CustomerRouters';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+
+<Routes>
+  <Route path="/*" element={<CustomerRouters />}></Route>
+</Routes>
+
+      
     </div>
   );
 }
