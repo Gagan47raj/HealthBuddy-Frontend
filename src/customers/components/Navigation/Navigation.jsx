@@ -268,8 +268,8 @@ export default function Navigation() {
 
                   <span className="sr-only">Your Company</span>
                   <img
-                    src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png"
-                    alt="Shopwithzosh"
+                    src="https://www.canva.com/design/DAGFmVT63xU/HmivLSGuBCFzCUm3JK-Ibw/view?utm_content=DAGFmVT63xU&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+                    alt="HealthBuddy"
                     className="h-8 w-8 mr-2"
                   />
 
