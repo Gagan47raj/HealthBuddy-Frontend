@@ -18,6 +18,7 @@ import TextField from "@mui/material/TextField";
 import AuthModel from "../../Auth/AuthModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../../States/Auth/Action";
+import healthBuddy from "./healthBuddy.png";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -268,9 +269,9 @@ export default function Navigation() {
 
                   <span className="sr-only">Your Company</span>
                   <img
-                    src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png"
-                    alt="Shopwithzosh"
-                    className="h-8 w-8 mr-2"
+                    src={healthBuddy}
+                    alt="HealthBuddy"
+                    className="h-12 w-12 mr-2"
                   />
 
               </div>

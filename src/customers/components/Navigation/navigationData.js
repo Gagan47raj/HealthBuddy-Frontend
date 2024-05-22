@@ -1,8 +1,8 @@
 export const navigation = {
   categories: [
     {
-      id: 'medicine',
-      name: 'Medicine',
+      id: 'antibiotics',
+      name: 'Antibiotics',
       featured: [
         {
           name: 'Prescription Drugs',
@@ -19,10 +19,10 @@ export const navigation = {
       ],
       sections: [
         {
-          id: 'generics',
-          name: 'Generics',
+          id: 'penicillins',
+          name: 'Penicillins',
           items: [
-            { name: 'Painkiller', id : 'painkiller' },
+            { name: 'Erythromycin', id : 'erythromycin' },
             { name: 'Diabetes', id: 'diabetes' }, // Update the href to point to the correct URL
             { name: 'Asthma', href: '/medicine/generics/asthma' },
             { name: 'Allergies', href: '/medicine/generics/allergies' },
