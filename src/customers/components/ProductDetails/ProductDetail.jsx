@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { findProductsById } from "../../../States/Product/Action";
 import { addItemToCart } from "../../../States/Cart/Action";
 
+
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -109,28 +110,7 @@ export default function ProductDetail() {
             role="list"
             className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
           >
-            {product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a
-                    href={breadcrumb.href}
-                    className="mr-2 text-sm font-medium text-gray-900"
-                  >
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
+            
             <li className="text-sm">
               <a
                 href={""}
@@ -152,18 +132,9 @@ export default function ProductDetail() {
                 alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
+              
             </div>
-            <div className="flex flex-wrap space-x-5 justify-center">
-              {product.images.map((item) => (
-                <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem]">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              ))}
-            </div>
+           
           </div>
 
           {/* Product info */}
@@ -299,25 +270,16 @@ export default function ProductDetail() {
 
               <div className="mt-10">
                 <h3 className="text-sm font-medium text-gray-900">
-                  Highlights
+                  
                 </h3>
 
-                <div className="mt-4">
-                  <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className="text-gray-400">
-                        <span className="text-gray-600">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                
               </div>
 
               <div className="mt-10">
-                <h2 className="text-sm font-medium text-gray-900">Details</h2>
+                
 
                 <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import Navigation from './customers/components/Navigation/Navigation';
 import HomePage from './customers/pages/HomePage/HomePage';

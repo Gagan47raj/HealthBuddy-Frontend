@@ -14,7 +14,7 @@ import { filters, singleFilter } from "./FilterData";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {findProducts} from "../../../States/Product/Action"
+import { findProducts } from "../../../States/Product/Action";
 import { Pagination } from "@mui/material";
 
 const sortOptions = [
@@ -31,77 +31,96 @@ export default function Product() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const param = useParams();
+  // const param = useParams();
   const dispatch = useDispatch();
-  const {products} = useSelector(store=>store);
+  const { products } = useSelector((store) => store);
 
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
-  
+
   const priceValue = searchParams.get("price");
   const discountValue = searchParams.get("discount");
   const sortValue = searchParams.get("sort");
-  const pageNumber = searchParams.get("page") || 1;
+  const [pageNumber, setPageNumber] = useState(1);
   const stock = searchParams.get("stock");
 
-  const handlePaginationChange=(event,value)=>{
-    const searchParams = new URLSearchParams(location.search)
-    searchParams.set("page",value);
-    const query = searchParams.toString();
-    navigate({search:`?${query}`})
-  }
+ 
 
-  const handleFilter=(value,sectionId)=>{
-    const searchParams = new URLSearchParams(location.search)
+  const handleFilter = (value, sectionId) => {
+    const searchParams = new URLSearchParams(location.search);
 
-    let filterValue = searchParams.getAll(sectionId)
-    if(filterValue.length > 0 && filterValue[0].split(",").includes(value))
-    {
-      filterValue = filterValue[0].split(",").filter((item)=>item !== value);
+    let filterValue = searchParams.getAll(sectionId);
+    if (filterValue.length > 0 && filterValue[0].split(",").includes(value)) {
+      filterValue = filterValue[0].split(",").filter((item) => item !== value);
 
-      if(filterValue.length === 0)
-      {
+      if (filterValue.length === 0) {
         searchParams.delete(sectionId);
       }
-    }
-    else
-    {
+    } else {
       filterValue.push(value);
     }
 
-    if(filterValue.length > 0)
-    {
-      searchParams.set(sectionId,filterValue.join(",")); 
+    if (filterValue.length > 0) {
+      searchParams.set(sectionId, filterValue.join(","));
     }
 
     const query = searchParams.toString();
-      navigate({search : `?${query}`});
-  }
+    navigate({ search: `?${query}` });
+  };
+
+  // useEffect(() => {
+  //   const [minPrice, maxPrice] =
+  //     priceValue == null ? [0, 0] : priceValue.split("-").map(Number);
+
+  //   const data = {
+  //     category: param.levelThree,
+  //     minPrice,
+  //     maxPrice: maxPrice === 0 ? 1000 : maxPrice,
+  //     minDiscount: discountValue || 0,
+  //     sortBy: sortValue || "price_low",
+  //     pageNumber: pageNumber - 1,
+  //     pageSize: 1,
+  //     stock: stock,
+  //   };
+
+  //   dispatch(findProducts(data));
+  // }, [
+  //   param.levelThree,
+  //   priceValue,
+  //   discountValue,
+  //   sortValue,
+  //   pageNumber,
+  //   stock,
+  // ]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const [minPrice, maxPrice] = priceValue == null ? [0, 0] : priceValue.split("-").map(Number);
+      const data = {
+        category: "",
+        minPrice,
+        maxPrice: maxPrice === 0 ? 1000 : maxPrice,
+        minDiscount: discountValue || 0,
+        sortBy: sortValue || "price_low",
+        pageNumber: pageNumber - 1, // Adjust for zero-based indexing
+        pageSize: 2, // Adjust the page size as needed
+        stock: stock,
+      };
+      dispatch(findProducts(data));
+    };
+    fetchData();
+  }, [dispatch, priceValue, discountValue, sortValue, pageNumber, stock]);
 
-    const [minPrice,maxPrice] = priceValue == null ? [0,0] : priceValue.split("-").map(Number);
+  // const handlePaginationChange = (event, value) => {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   searchParams.set("page", value);
+  //   const query = searchParams.toString();
+  //   navigate({ search: `?${query}` });
+  // };
 
-    const data = {
-      category : param.levelThree,
-      minPrice,
-      maxPrice : maxPrice === 0 ? 1000 : maxPrice,
-      minDiscount : discountValue || 0,
-      sortBy: sortValue || "price_low",
-      pageNumber : pageNumber - 1,
-      pageSize : 1,
-      stock:stock
-    }
-
-    dispatch(findProducts(data))
-
-  },[param.levelThree,
-     priceValue,
-     discountValue,
-     sortValue,
-     pageNumber,
-     stock
-  ])
+  const handlePaginationChange = (event, value) => {
+    setPageNumber(value); // Update local state for page number
+  };
 
   return (
     <div className="bg-white">
@@ -230,9 +249,9 @@ export default function Product() {
         </Transition.Root>
 
         <main className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              New Arrivals
+              All Medicine
             </h1>
 
             <div className="flex items-center">
@@ -306,14 +325,13 @@ export default function Product() {
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
-              
-              <div>
 
+              <div>
                 <div className="flex items-center justify-between pb-4">
-                <h1 className="text-lg opacity-60 font-bold">Filters</h1>
-                <FilterListIcon/>
+                  <h1 className="text-lg opacity-60 font-bold">Filters</h1>
+                  <FilterListIcon />
                 </div>
-                
+
                 <form className="hidden lg:block">
                   {filters.map((section) => (
                     <Disclosure
@@ -351,7 +369,9 @@ export default function Product() {
                                   className="flex items-center"
                                 >
                                   <input
-                                  onChange={() => handleFilter(option.value,section.id)}
+                                    onChange={() =>
+                                      handleFilter(option.value, section.id)
+                                    }
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
@@ -422,17 +442,22 @@ export default function Product() {
               {/* Product grid */}
               <div className="lg:col-span-3 w-full">
                 <div className="flex flex-wrap justify-center bh-white py-5">
-                {products.products?.content && products.products.content.map((item) => (
-                    <ProductCard product={item} />
-                  ))}
+                  {products.products?.content &&
+                    products.products.content.map((item) => (
+                      <ProductCard product={item} />
+                    ))}
                 </div>
               </div>
             </div>
           </section>
           <section>
             <div className="px-4 py-5 flex justify-center">
-            <Pagination count={products.products?.totalPages} color="secondary"
-             onChange={handlePaginationChange}/>
+              <Pagination
+                count={products.products?.totalPages}
+                color="secondary"
+                page={pageNumber}
+                onChange={handlePaginationChange}
+              />
             </div>
           </section>
         </main>

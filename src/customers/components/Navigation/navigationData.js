@@ -1,48 +1,6 @@
 export const navigation = {
   categories: [
     {
-      id: 'antibiotics',
-      name: 'Antibiotics',
-      featured: [
-        {
-          name: 'Prescription Drugs',
-          href: '/medicine/prescription_drugs',
-          imageSrc: 'https://example.com/prescription_drugs.jpg',
-          imageAlt: 'Prescription drugs',
-        },
-        {
-          name: 'Over-the-Counter (OTC) Medications',
-          href: '/medicine/otc_medications',
-          imageSrc: 'https://example.com/otc_medications.jpg',
-          imageAlt: 'Over-the-counter medications',
-        },
-      ],
-      sections: [
-        {
-          id: 'penicillins',
-          name: 'Penicillins',
-          items: [
-            { name: 'Erythromycin', id : 'erythromycin' },
-            { name: 'Diabetes', id: 'diabetes' }, // Update the href to point to the correct URL
-            { name: 'Asthma', href: '/medicine/generics/asthma' },
-            { name: 'Allergies', href: '/medicine/generics/allergies' },
-            { name: 'Pain Relief', href: '/medicine/generics/pain_relief' },
-        ],
-        },
-        {
-          id: 'categories',
-          name: 'Categories',
-          items: [
-            { name: 'Vitamins & Supplements', href: '/medicines/vitamins_supplements' },
-            { name: 'Cold & Flu', href: '/medicines/cold_flu' },
-            { name: 'Digestive Health', href: '/medicines/digestive_health' },
-            { name: 'Skin Care', href: '/medicines/skin_care' },
-            { name: 'Eye Care', href: '/medicines/eye_care' },
-          ],
-        },
-      ],
-    },
-    {
       id: 'medical_devices',
       name: 'Medical Devices',
       featured: [
@@ -75,7 +33,9 @@ export const navigation = {
     },
   ],
   pages: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Contact Us', href: '/contact' },
+    { name: '🏠Home', href: '/' },
+    { name: '💊Medicine', href: '/medicine' },
+    { name: '👨🏻‍💻About Us', href: '/about' },
+    { name: '📞Contact Us', href: '/contact' },
   ],
 };
