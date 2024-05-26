@@ -14,6 +14,7 @@ const Cart = () => {
     const handleCheckOut = () => {
         navigate("/checkout?step=2");
     }
+    
     useEffect(()=>{
         dispatch(getCart())
     },[cart.updateCartItem,cart.deleteCartItem])

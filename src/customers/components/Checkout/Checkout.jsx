@@ -12,7 +12,7 @@ import OrderSummary from './OrderSummary';
 const steps = ['Login', 'Delivery Address', 'Order Summary', 'Payment'];
 
 export default function HorizontalLinearStepper() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);    
   const location = useLocation();
   const querySearch = new URLSearchParams(location.search)
 

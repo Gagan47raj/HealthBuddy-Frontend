@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 
 const HomeSectionCard = ({ product }) => {
@@ -19,6 +20,15 @@ const HomeSectionCard = ({ product }) => {
         <p className="mt-2 text-sm text-gray-500">
           {product.brand}
           </p>
+
+          <div className="flex justify-between items-center mt-4">
+            <p className="mt-2 mb-4 text-sm text-black-500 font-bold">
+          ₹{product.price}
+          </p>
+          <Button variant="contained" className="z-50 bg-white p-2 w-[5rem]">Buy</Button>
+          </div>
+          
+          
       </div>
     </div>
   );
