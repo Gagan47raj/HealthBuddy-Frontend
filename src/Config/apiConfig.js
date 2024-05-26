@@ -9,8 +9,5 @@ export const api = axios.create({
     headers:{
         "Authorization":`Bearer ${jwt}`,
         'Content-Type':"application/json" 
-    },
-    https: {
-        rejectUnauthorized: false
     }
 });
