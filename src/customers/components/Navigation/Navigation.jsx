@@ -49,19 +49,20 @@ export default function Navigation() {
   const handleProfileMenu = () => {
     navigate("/profile");
   };
-  
+
   const handleClose = () => {
     setOpenAuthModal(false);
   };
 
-  const handleCategoryClick = (category, section, item, close) => {
-    navigate(`/${category.id}/${section.id}/${item.id}`);
-    close();
-  };
+  // const handleCategoryClick = (category, section, item, close) => {
+  //   navigate(`/${category.id}/${section.id}/${item.id}`);
+  //   close();
+  // };
 
   useEffect(() => {
     if (jwt) {
       dispatch(getUser(jwt));
+      dispatch(getCart(jwt));
     }
   }, [jwt, auth.jwt]);
 
@@ -72,7 +73,6 @@ export default function Navigation() {
     if (location.pathname === "/login" || location.pathname === "/register") {
       navigate(-1);
     }
-    dispatch(getCart());
   }, [auth.user]);
 
   const handleLogout = () => {
@@ -80,8 +80,6 @@ export default function Navigation() {
     handleCloseUserMenu();
     localStorage.clear();
   };
-  
-  
 
   return (
     <div className="bg-white pb-10">
@@ -319,9 +317,8 @@ export default function Navigation() {
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem onClick={handleProfileMenu}>
-                          Profile
-                        </MenuItem>
+                        {(auth.user?.role === "admin") ? <MenuItem onClick={() => navigate("/admin")}>Dashboard</MenuItem> : null}
+                        <MenuItem onClick={handleProfileMenu}>Profile</MenuItem>
                         <MenuItem onClick={() => navigate("/account/order")}>
                           My Orders
                         </MenuItem>
@@ -343,35 +340,55 @@ export default function Navigation() {
                   <p className="p-2 text-gray-400 hover:text-gray-500">
                     <span className="sr-only">Search</span>
 
-                    <MagnifyingGlassIcon
-                      className="h-6 w-6"
-                      aria-hidden="true"
+                    <input
+                      type="search"
+                      class="peer cursor-pointer relative z-10 h-12 w-12 rounded-full border bg-transparent pl-12 outline-none focus:w-full focus:cursor-text focus:border-blue-300 focus:pl-16 focus:pr-4"
                     />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-gray-500 px-3.5 peer-focus:border-blue-300 peer-focus:stroke-blue-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
                   </p>
                 </div>
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                 
-                  <Button onClick={(()=> navigate("/cart"))} className="group -m-2 flex items-center p-2">
-                    
-                    
+                  <Button
+                    onClick={() => navigate("/cart")}
+                    className="group -m-2 flex items-center p-2"
+                  >
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
-                    <button 
-                    style={{border:"1px solid #3498db",background:"#3498db", height:"25px",width:"25px",borderRadius:"50%", color:"white"}}>
-                      {cart?.cart?.cartItems.length}
-                    </button>
-
+                    {auth.user && (
+                      <button
+                        style={{
+                          border: "1px solid #3498db",
+                          background: "#3498db",
+                          height: "25px",
+                          width: "25px",
+                          borderRadius: "50%",
+                          color: "white",
+                        }}
+                      >
+                        {cart?.cart?.cartItems?.length || 0}
+                      </button>
+                    )}
 
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"></span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Button>
-
-
-
                 </div>
               </div>
             </div>

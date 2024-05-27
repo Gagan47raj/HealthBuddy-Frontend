@@ -24,6 +24,10 @@ const initialState = {
   loading: false,
   orders: [],
   error: "",
+  confirmed: false,
+  shipped: false,
+  delivered: false,
+  deleteOrder: false,
 };
 
 const adminOrderReducer = (state = initialState, action) => {
@@ -35,9 +39,8 @@ const adminOrderReducer = (state = initialState, action) => {
       };
     case GET_ORDERS_SUCCESS:
       return {
-        loading: false,
+        ...state,
         orders: action.payload,
-        error: "",
       };
     case GET_ORDERS_FAILURE:
       return {

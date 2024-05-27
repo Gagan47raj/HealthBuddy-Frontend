@@ -21,26 +21,24 @@ const initialSizes = [
   { name: "100 mL/gm", quantity: 0 },
   { name: "150 mL/gm", quantity: 0 },
   { name: "200 mL/gm", quantity: 0 },
-  { name: "250 mL/gm", quantity: 0 }
+  { name: "250 mL/gm", quantity: 0 },
 ];
 
-
-
 const CreateProductForm = () => {
-    const [productData, setProductData] = useState({
-      imageUrl: "",
-      brand: "",
-      name: "",
-      price: "",
-      discountedPrice: "",
-      discountPercent: "",
-      size: initialSizes,
-      description: "",
-      quantity: "",
-      firstCategory: "",
-      secondCategory: "",
-      thirdCategory: "",
-    });
+  const [productData, setProductData] = useState({
+    imageUrl: "",
+    brand: "",
+    name: "",
+    price: "",
+    discountedPrice: "",
+    discountPercent: "",
+    size: initialSizes,
+    description: "",
+    quantity: "",
+    category: "",
+    severity: "",
+    medicineType: "",
+  });
 
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
@@ -50,7 +48,7 @@ const CreateProductForm = () => {
     setProductData((prevState) => ({
       ...prevState,
       [name]: value,
-    }));  
+    }));
   };
 
   const handleSizeChange = (e, index) => {
@@ -68,10 +66,10 @@ const CreateProductForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (productData.firstCategory) {
+    if (productData.category) {
       dispatch(createProduct(productData));
     } else {
-      console.error('First category must be selected');
+      console.error("First category must be selected");
     }
   };
 
@@ -166,30 +164,69 @@ const CreateProductForm = () => {
 
           <Grid item xs={12} sm={4}>
             <FormControl fullWidth>
-              <InputLabel>First Category</InputLabel>
+              <InputLabel>Disease</InputLabel>
               <Select
-                name="firstCategory"
-                value={productData.firstCategory}
+                name="category"
+                value={productData.category}
                 onChange={handleChange}
                 label="First Category"
               >
-                <MenuItem value="analgesics">Analgesics</MenuItem>
-                <MenuItem value="antibiotics">Antibiotics</MenuItem>
-                <MenuItem value="antivirals">Antivirals</MenuItem>
-                <MenuItem value="antifungals">Antifungals</MenuItem>
-                <MenuItem value="antihypertensives">Antihypertensives</MenuItem>
-                <MenuItem value="antidiabetics">Antidiabetics</MenuItem>
-                <MenuItem value="antidepressants">Antidepressants</MenuItem>
-                <MenuItem value="antipsychotics">Antipsychotics</MenuItem>
-                <MenuItem value="gastrointestinalagents">
-                  Gastrointestinal Agents
+                <MenuItem value="Acne">Acne</MenuItem>
+                <MenuItem value="AIDS">AIDS</MenuItem>
+                <MenuItem value="Alcoholic hepatitis">
+                  Alcoholic hepatitis
                 </MenuItem>
-                <MenuItem value="respiratoryagents">
-                  Respiratory Agents
+                <MenuItem value="Allergy">Allergy</MenuItem>
+                <MenuItem value="Arthritis">Arthritis</MenuItem>
+                <MenuItem value="Bronchial Asthma">Bronchial Asthma</MenuItem>
+                <MenuItem value="Cervical spondylosis">
+                  Cervical spondylosis
                 </MenuItem>
-                <MenuItem value="anticoagulants">Anticoagulants</MenuItem>
-                <MenuItem value="vitaminsandsupplements">
-                  Vitamins and Supplements
+                <MenuItem value="Chicken pox">Chicken pox</MenuItem>
+                <MenuItem value="Chronic cholestasis">
+                  Chronic cholestasis
+                </MenuItem>
+                <MenuItem value="Common Cold">Common Cold</MenuItem>
+                <MenuItem value="Dengue">Dengue</MenuItem>
+                <MenuItem value="Diabetes">Diabetes</MenuItem>
+                <MenuItem value="Dimorphic hemmorhoids(piles)">
+                  Dimorphic hemmorhoids(piles)
+                </MenuItem>
+                <MenuItem value="Drug Reaction">Drug Reaction</MenuItem>
+                <MenuItem value="Fungal infection">Fungal infection</MenuItem>
+                <MenuItem value="Gastroenteritis">Gastroenteritis</MenuItem>
+                <MenuItem value="GERD">GERD</MenuItem>
+                <MenuItem value="Heart attack">Heart attack</MenuItem>
+                <MenuItem value="Hepatitis A">Hepatitis A</MenuItem>
+                <MenuItem value="Hepatitis B">Hepatitis B</MenuItem>
+                <MenuItem value="Hepatitis C">Hepatitis C</MenuItem>
+                <MenuItem value="Hepatitis D">Hepatitis D</MenuItem>
+                <MenuItem value="Hepatitis E">Hepatitis E</MenuItem>
+                <MenuItem value="Hyperthyroidism">Hyperthyroidism</MenuItem>  
+                <MenuItem value="Hypertension">Hypertension</MenuItem>
+                <MenuItem value="Hypoglycemia">Hypoglycemia</MenuItem>
+                <MenuItem value="Hypothyroidism">Hypothyroidism</MenuItem>
+                <MenuItem value="Impetigo">Impetigo</MenuItem>
+                <MenuItem value="Jaundice">Jaundice</MenuItem>
+                <MenuItem value="Malaria">Malaria</MenuItem>
+                <MenuItem value="Migraine">Migraine</MenuItem>
+                <MenuItem value="Osteoarthritis">Osteoarthritis</MenuItem>
+                <MenuItem value="Paralysis (brain hemorrhage)">
+                  Paralysis (brain hemorrhage)
+                </MenuItem>
+                <MenuItem value="Peptic ulcer disease">
+                  Peptic ulcer disease
+                </MenuItem>
+                <MenuItem value="Pneumonia">Pneumonia</MenuItem>
+                <MenuItem value="Psoriasis">Psoriasis</MenuItem>
+                <MenuItem value="Typhoid">Typhoid</MenuItem>
+                <MenuItem value="Tuberculosis">Tuberculosis</MenuItem>
+                <MenuItem value="Urinary tract infection">
+                  Urinary tract infection
+                </MenuItem>
+                <MenuItem value="Varicose veins">Varicose veins</MenuItem>
+                <MenuItem value="(vertigo) Paroxysmal Positional Vertigo">
+                  (vertigo) Paroxysmal Positional Vertigo
                 </MenuItem>
               </Select>
             </FormControl>
@@ -197,135 +234,51 @@ const CreateProductForm = () => {
 
           <Grid item xs={12} sm={4}>
             <FormControl fullWidth>
-              <InputLabel>Second Category</InputLabel>
+              <InputLabel>Severity Level</InputLabel>
               <Select
-                name="secondCategory"
-                value={productData.secondCategory}
+                name="severity"
+                value={productData.severity}
                 onChange={handleChange}
                 label="Second Category"
               >
-                <MenuItem value="nonopioidanalgesics">
-                  Non-Opioid Analgesics
-                </MenuItem>
-                <MenuItem value="opioidanalgesics">Opioid Analgesics</MenuItem>
-                <MenuItem value="penicillins">Penicillins</MenuItem>
-                <MenuItem value="cephalosporins">Cephalosporins</MenuItem>
-                <MenuItem value="macrolides">Macrolides</MenuItem>
-                <MenuItem value="fluoroquinolones">Fluoroquinolones</MenuItem>
-                <MenuItem value="hivantivirals">HIV Antivirals</MenuItem>
-                <MenuItem value="herpesantivirals">Herpes Antivirals</MenuItem>
-                <MenuItem value="influenzaantivirals">
-                  Influenza Antivirals
-                </MenuItem>
-                <MenuItem value="azoles">Azoles</MenuItem>
-                <MenuItem value="echinocandins">Echinocandins</MenuItem>
-                <MenuItem value="polyeneantifungals">
-                  Polyene Antifungals
-                </MenuItem>
-                <MenuItem value="aceinhibitors">ACE Inhibitors</MenuItem>
-                <MenuItem value="betablockers">Beta Blockers</MenuItem>
-                <MenuItem value="calciumchannelblockers">
-                  Calcium Channel Blockers
-                </MenuItem>
-                <MenuItem value="diuretics">Diuretics</MenuItem>
-                <MenuItem value="insulins">Insulins</MenuItem>
-                <MenuItem value="oralhypoglycemics">
-                  Oral Hypoglycemics
-                </MenuItem>
-                <MenuItem value="selectiveserotoninreuptakeinhibitors">
-                  Selective Serotonin Reuptake Inhibitors (SSRIs)
-                </MenuItem>
-                <MenuItem value="serotoninnorepinephrinereuptakeinhibitors">
-                  Serotonin-Norepinephrine Reuptake Inhibitors (SNRIs)
-                </MenuItem>
-                <MenuItem value="tricyclicantidepressants">
-                  Tricyclic Antidepressants (TCAs)
-                </MenuItem>
-                <MenuItem value="typicalantipsychotics">
-                  Typical Antipsychotics
-                </MenuItem>
-                <MenuItem value="atypicalantipsychotics">
-                  Atypical Antipsychotics
-                </MenuItem>
-                <MenuItem value="protonpumpinhibitors">
-                  Proton Pump Inhibitors (PPIs)
-                </MenuItem>
-                <MenuItem value="h2receptorantagonists">
-                  H2 Receptor Antagonists
-                </MenuItem>
-                <MenuItem value="laxatives">Laxatives</MenuItem>
-                <MenuItem value="bronchodilators">Bronchodilators</MenuItem>
-                <MenuItem value="corticosteroids">Corticosteroids</MenuItem>
-                <MenuItem value="leukotrienereceptorantagonists">
-                  Leukotriene Receptor Antagonists
-                </MenuItem>
-                <MenuItem value="vitaminkantagonists">
-                  Vitamin K Antagonists
-                </MenuItem>
-                <MenuItem value="directoralanticoagulants">
-                  Direct Oral Anticoagulants (DOACs)
-                </MenuItem>
-                <MenuItem value="heparins">Heparins</MenuItem>
-                <MenuItem value="vitamins">Vitamins</MenuItem>
-                <MenuItem value="minerals">Minerals</MenuItem>
-                <MenuItem value="herbalsupplements">
-                  Herbal Supplements
-                </MenuItem>
+                <MenuItem value="mild">Mild</MenuItem>
+                <MenuItem value="moderate">Moderate</MenuItem>
+                <MenuItem value="critical">Severe</MenuItem>
+                <MenuItem value="critical">Critical</MenuItem>
               </Select>
             </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={4}>
             <FormControl fullWidth>
-              <InputLabel>Third Category</InputLabel>
+              <InputLabel>Medicine Type</InputLabel>
               <Select
-                name="thirdCategory"
-                value={productData.thirdCategory}
+                name="medicineType"
+                value={productData.medicineType}
                 onChange={handleChange}
                 label="Third Category"
               >
-                <MenuItem value="acetaminophen">
-                  Acetaminophen (e.g., Tylenol)
-                </MenuItem>
-                <MenuItem value="Nonsteroidal Anti-Inflammatory Drug">
-                  Nonsteroidal Anti-Inflammatory Drugs (NSAIDs) (e.g.,
-                  ibuprofen, naproxen)
-                </MenuItem>
-                <MenuItem value="Morphine">Morphine</MenuItem>
-                <MenuItem value="Oxycodone">Oxycodone</MenuItem>
-                <MenuItem value="Fentanyl">Fentanyl</MenuItem>
-                <MenuItem value="Amoxicillin">Amoxicillin</MenuItem>
-                <MenuItem value="Penicillin">Penicillin G</MenuItem>
-                <MenuItem value="Ceftriaxone">Ceftriaxone</MenuItem>
-                <MenuItem value="Cephalexin">Cephalexin</MenuItem>
-                <MenuItem value="Azithromycin">Azithromycin</MenuItem>
-                <MenuItem value="Erythromycin">Erythromycin</MenuItem>
-                <MenuItem value="Ciprofloxacin">Ciprofloxacin</MenuItem>
-                <MenuItem value="Levofloxacin">Levofloxacin</MenuItem>
-                <MenuItem value="Zidovudine">Zidovudine (AZT)</MenuItem>
-                <MenuItem value="Lamivudine">Lamivudine</MenuItem>
-                <MenuItem value="Acyclovir">Acyclovir</MenuItem>
-                <MenuItem value="Valacyclovir">Valacyclovir</MenuItem>
-                <MenuItem value="Oseltamivir">Oseltamivir (Tamiflu)</MenuItem>
-                <MenuItem value="Zanamivir">Zanamivir</MenuItem>
-                <MenuItem value="Fluconazole">Fluconazole</MenuItem>
-                <MenuItem value="Ketoconazole">Ketoconazole</MenuItem>
-                <MenuItem value="Caspofungin">Caspofungin</MenuItem>
-                <MenuItem value="Micafungin">Micafungin</MenuItem>
-                <MenuItem value="Amphotericin">Amphotericin B</MenuItem>
-                <MenuItem value="Nystatin">Nystatin</MenuItem>
-                <MenuItem value="Lisinopril">Lisinopril</MenuItem>
-                <MenuItem value="Enalapril">Enalapril</MenuItem>
-                <MenuItem value="Metoprolol">Metoprolol</MenuItem>
-                <MenuItem value="Atenolol">Atenolol</MenuItem>
-                <MenuItem value="Amlodipine">Amlodipine</MenuItem>
-                <MenuItem value="Verapamil">Verapamil</MenuItem>
-                <MenuItem value="Hydrochlorothiazide">
-                  Hydrochlorothiazide
-                </MenuItem>
-                <MenuItem value="Furosemide">Furosemide</MenuItem>
-                <MenuItem value="Insulin Glargine">Insulin Glargine</MenuItem>
-                <MenuItem value="Insulin Lispro">Insulin Lispro</MenuItem>
+                <MenuItem value="tablet">Tablet</MenuItem>
+                <MenuItem value="capsule">Capsule</MenuItem>
+                <MenuItem value="injection">Injection</MenuItem>
+                <MenuItem value="cream">Cream</MenuItem>
+                <MenuItem value="ointment">Ointment</MenuItem>
+                <MenuItem value="gel">Gel</MenuItem>
+                <MenuItem value="syrup">Syrup</MenuItem>
+                <MenuItem value="suspension">Suspension</MenuItem>
+                <MenuItem value="powder">Powder</MenuItem>
+                <MenuItem value="suppository">Suppository</MenuItem>
+                <MenuItem value="drops">Drops</MenuItem>
+                <MenuItem value="inhaler">Inhaler</MenuItem>
+                <MenuItem value="patch">Patch</MenuItem>
+                <MenuItem value="lozenge">Lozenge</MenuItem>
+                <MenuItem value="spray">Spray</MenuItem>
+                <MenuItem value="solution">Solution</MenuItem>
+                <MenuItem value="lotion">Lotion</MenuItem>
+                <MenuItem value="foam">Foam</MenuItem>
+                <MenuItem value="shampoo">Shampoo</MenuItem>
+                <MenuItem value="granules">Granules</MenuItem>
+                <MenuItem value="emulsion">Emulsion</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -368,15 +321,15 @@ const CreateProductForm = () => {
             </Grid>
           ))}
           <Grid item xs={12}>
-            <Button 
-            variant="contained"
-            sx={{p:1.8}}
-            className="py-20"
-            size="large"
-            type="submit"
+            <Button
+              variant="contained"
+              sx={{ p: 1.8 }}
+              className="py-20"
+              size="large"
+              type="submit"
             >
-             Add New Product
-            </Button> 
+              Add New Product
+            </Button>
           </Grid>
         </Grid>
       </form>

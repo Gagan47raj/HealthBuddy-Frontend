@@ -8,6 +8,8 @@ import CustomerTables from './components/CustomerTables';
 import OrdersTable from './components/OrdersTable';
 import CreateProductForm from './components/CreateProductForm';
 import ProductTables from './components/ProductTables';
+import { logout } from '../States/Auth/Action';
+import { useDispatch } from 'react-redux';
 
 
 const menu =[
@@ -23,6 +25,13 @@ const Admin = () => {
     const isLargeScreen=useMediaQuery(theme.breakpoints.up("lg"));
     const [sideBarVisible,setSideBarVisible]=useState(false);
     const navigate = useNavigate(); 
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        localStorage.clear();
+        navigate("/");
+      };
     
     const drawer = (
         <Box
@@ -53,11 +62,27 @@ const Admin = () => {
             <List>
                 
                 <ListItem  disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => navigate("/profile")}>
                         <ListItemIcon>
                             <AccountCircle/>
                         </ListItemIcon>
                         <ListItemText>Profile</ListItemText>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem  disablePadding>
+                    <ListItemButton onClick={() => navigate("/")}>
+                        <ListItemIcon>
+                            <AccountCircle/>
+                        </ListItemIcon>
+                        <ListItemText>Home</ListItemText>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem  disablePadding>
+                    <ListItemButton onClick={handleLogout}>
+                        <ListItemIcon>
+                            <AccountCircle/>
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
                     </ListItemButton>
                 </ListItem>
                 

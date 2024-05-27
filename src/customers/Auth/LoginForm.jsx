@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from '@mui/material';
-import React from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate } from 'react-router-dom';
 import { login } from '../../States/Auth/Action';
 
@@ -9,6 +9,13 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { auth } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (auth.jwt) {
+      navigate('/'); // Or wherever you want to navigate after successful login/registration
+    }
+  }, [auth.jwt, navigate])
    
 
   const handleSubmit=(event)=>{
