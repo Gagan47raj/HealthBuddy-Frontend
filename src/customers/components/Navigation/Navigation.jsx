@@ -31,7 +31,7 @@ export default function Navigation() {
   const openUserMenu = Boolean(anchorEl);
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-  const dispatch = useDispatch();\
+  const dispatch = useDispatch();
   const { auth, cart } = useSelector((store) => store);
   const location = useLocation();
 
