@@ -19,7 +19,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../../States/Auth/Action";
 import healthBuddy from "./healthBuddy.png";
 import { getCart } from "../../../States/Cart/Action";
-import { getCart } from "../../../States/Cart/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -32,8 +31,7 @@ export default function Navigation() {
   const openUserMenu = Boolean(anchorEl);
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-  const dispatch = useDispatch();
-  const { auth, cart } = useSelector((store) => store);
+  const dispatch = useDispatch();\
   const { auth, cart } = useSelector((store) => store);
   const location = useLocation();
 
