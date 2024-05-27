@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../../States/Auth/Action";
 import healthBuddy from "./healthBuddy.png";
 import { getCart } from "../../../States/Cart/Action";
+import { getCart } from "../../../States/Cart/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -32,6 +33,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
+  const { auth, cart } = useSelector((store) => store);
   const { auth, cart } = useSelector((store) => store);
   const location = useLocation();
 
@@ -73,6 +75,7 @@ export default function Navigation() {
     if (location.pathname === "/login" || location.pathname === "/register") {
       navigate(-1);
     }
+    dispatch(getCart());
   }, [auth.user]);
 
   const handleLogout = () => {
@@ -80,6 +83,8 @@ export default function Navigation() {
     handleCloseUserMenu();
     localStorage.clear();
   };
+  
+  
 
   return (
     <div className="bg-white pb-10">
@@ -389,6 +394,9 @@ export default function Navigation() {
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"></span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Button>
+
+
+
                 </div>
               </div>
             </div>
