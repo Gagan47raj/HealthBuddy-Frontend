@@ -35,7 +35,7 @@ export const navigation = {
   pages: [
     { name: '🏠Home', href: '/' },
     { name: '💊Medicine', href: '/medicine' },
-    { name: '👨🏻‍💻About Us', href: '/about' },
-    { name: '📞Contact Us', href: '/contact' },
+    { name: '👨🏻‍💻About Us', href: '/aboutus' },
+    { name: '📞Contact Us', href: '/contactus' },
   ],
 };

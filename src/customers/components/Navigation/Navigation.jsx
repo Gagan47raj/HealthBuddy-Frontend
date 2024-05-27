@@ -18,6 +18,7 @@ import AuthModel from "../../Auth/AuthModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../../States/Auth/Action";
 import healthBuddy from "./healthBuddy.png";
+import { getCart } from "../../../States/Cart/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -31,7 +32,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
-  const { auth } = useSelector((store) => store);
+  const { auth, cart } = useSelector((store) => store);
   const location = useLocation();
 
   const handleUserClick = (event) => {
@@ -44,6 +45,11 @@ export default function Navigation() {
   const handleOpen = () => {
     setOpenAuthModal(true);
   };
+
+  const handleProfileMenu = () => {
+    navigate("/profile");
+  };
+  
   const handleClose = () => {
     setOpenAuthModal(false);
   };
@@ -66,6 +72,7 @@ export default function Navigation() {
     if (location.pathname === "/login" || location.pathname === "/register") {
       navigate(-1);
     }
+    dispatch(getCart());
   }, [auth.user]);
 
   const handleLogout = () => {
@@ -73,6 +80,8 @@ export default function Navigation() {
     handleCloseUserMenu();
     localStorage.clear();
   };
+  
+  
 
   return (
     <div className="bg-white pb-10">
@@ -310,7 +319,7 @@ export default function Navigation() {
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem onClick={handleCloseUserMenu}>
+                        <MenuItem onClick={handleProfileMenu}>
                           Profile
                         </MenuItem>
                         <MenuItem onClick={() => navigate("/account/order")}>
@@ -343,14 +352,26 @@ export default function Navigation() {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <Button className="group -m-2 flex items-center p-2">
+                 
+                  <Button onClick={(()=> navigate("/cart"))} className="group -m-2 flex items-center p-2">
+                    
+                    
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
+                    <button 
+                    style={{border:"1px solid #3498db",background:"#3498db", height:"25px",width:"25px",borderRadius:"50%", color:"white"}}>
+                      {cart?.cart?.cartItems.length}
+                    </button>
+
+
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"></span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Button>
+
+
+
                 </div>
               </div>
             </div>

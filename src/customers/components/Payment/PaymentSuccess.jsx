@@ -77,7 +77,7 @@ const PaymentSuccess = () => {
             </Grid>
 
             <Grid item>
-              <AddressCard address={order.order?.address} />
+              <AddressCard address={order.order?.address} showButton={false}/>
             </Grid>
           </Grid>
         </Grid>
