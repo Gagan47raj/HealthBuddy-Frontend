@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import InfoCard from './InfoCard'
-import { Card } from '@windmill/react-ui'
+import { Card } from '@mui/material'
 import { UsersIcon } from '@heroicons/react/16/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { findUser } from '../../States/User/Action'
