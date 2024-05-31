@@ -1,6 +1,6 @@
 import React from 'react'
 import InfoCard from './InfoCard'
-import { Card } from '@windmill/react-ui'
+import { Card } from '@mui/material'
 import { UserCircleIcon, UsersIcon } from '@heroicons/react/16/solid'
 import { ShoppingBag } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
